@@ -16,11 +16,6 @@
 		"db:studio": "drizzle-kit studio"
 	},
 	"packageManager": "pnpm@11.0.9",
-	"pnpm": {
-		"onlyBuiltDependencies": [
-			"esbuild"
-		]
-	},
 	"devDependencies": {
 		"@internationalized/date": "^3.12.2",
 		"@lucide/svelte": "^1.21.0",
