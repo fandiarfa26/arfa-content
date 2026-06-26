@@ -31,7 +31,7 @@ export async function load() {
 			.orderBy(desc(contents.uploadDate));
 
 		const today = localDateStr(new Date());
-		const rangeStart = getWeekStart(new Date(addDays(today, -28)));
+		const rangeStart = getWeekStart(new Date(today));
 		const rangeEnd = getWeekStart(new Date(addDays(today, 28)));
 
 		const weeks: Array<{ startDate: string; endDate: string; items: typeof allContents }> = [];

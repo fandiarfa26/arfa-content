@@ -6,6 +6,7 @@
 	import { Label } from '$lib/components/ui/label';
 	import { Separator } from '$lib/components/ui/separator';
 	import * as Card from '$lib/components/ui/card';
+	import * as Dialog from '$lib/components/ui/dialog';
 	import Trash2 from '@lucide/svelte/icons/trash-2';
 	import { toast } from 'svelte-sonner';
 
@@ -34,7 +35,7 @@
 		editMode?: boolean;
 	} = $props();
 
-	let deleting = $state(false);
+	let open = $state(false);
 </script>
 
 <form method="POST" action={formAction} use:enhance={() => {
@@ -96,7 +97,9 @@
 
 			<div class="space-y-2">
 				<Label for="cta">CTA</Label>
-				<Input id="cta" type="text" name="cta" value={content.cta ?? ''} />
+				<textarea id="cta" name="cta" rows="2"
+					class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+				>{content.cta ?? ''}</textarea>
 			</div>
 
 			<div class="space-y-2">
@@ -108,7 +111,9 @@
 
 			<div class="space-y-2">
 				<Label for="hashtags">Hashtags</Label>
-				<Input id="hashtags" type="text" name="hashtags" value={content.hashtags ?? ''} />
+				<textarea id="hashtags" name="hashtags" rows="2"
+					class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+				>{content.hashtags ?? ''}</textarea>
 			</div>
 		</Card.Content>
 	</Card.Root>
@@ -140,7 +145,7 @@
 	<div class="flex gap-3">
 		<Button type="submit" class="flex-1">{editMode ? 'Save' : 'Create'}</Button>
 		{#if editMode && deleteAction}
-			<Button type="button" variant="destructive" onclick={() => deleting = !deleting}>
+			<Button type="button" variant="destructive" onclick={() => open = true}>
 				<Trash2 class="size-4" />
 				Delete
 			</Button>
@@ -148,18 +153,26 @@
 	</div>
 </form>
 
-{#if deleting && deleteAction}
-	<form method="POST" action={deleteAction} use:enhance={() => {
-			return async ({ result, update }) => {
-				if (result.type === 'failure') {
-					toast.error((result.data as { error?: string })?.error || 'Gagal');
-				} else if (result.type === 'redirect') {
-					toast.success('Dihapus');
-					await update();
-				}
-			};
-		}} class="mx-auto max-w-2xl">
-		<p class="text-destructive mb-2 text-sm">Yakin ingin menghapus?</p>
-		<Button type="submit" variant="destructive" class="w-full">Confirm Delete</Button>
-	</form>
-{/if}
+<Dialog.Root bind:open>
+	<Dialog.Content>
+		<Dialog.Header>
+			<Dialog.Title>Hapus konten?</Dialog.Title>
+			<Dialog.Description>Tindakan ini tidak bisa dibatalkan.</Dialog.Description>
+		</Dialog.Header>
+		<form method="POST" action={deleteAction} use:enhance={() => {
+				return async ({ result, update }) => {
+					if (result.type === 'failure') {
+						toast.error((result.data as { error?: string })?.error || 'Gagal');
+					} else if (result.type === 'redirect') {
+						toast.success('Dihapus');
+						await update();
+					}
+				};
+			}}>
+			<Dialog.Footer>
+				<Button type="button" variant="outline" onclick={() => open = false}>Batal</Button>
+				<Button type="submit" variant="destructive">Hapus</Button>
+			</Dialog.Footer>
+		</form>
+	</Dialog.Content>
+</Dialog.Root>

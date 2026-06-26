@@ -8,6 +8,13 @@
       "when": 1782373675499,
       "tag": "0000_exotic_scarecrow",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1782440396732,
+      "tag": "0001_marvelous_lucky_pierre",
+      "breakpoints": true
     }
   ]
 }

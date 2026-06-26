@@ -45,11 +45,12 @@ export const actions = {
 		try {
 			const db = getDb();
 			await db.update(contents).set({ ...fields, updatedAt: new Date() }).where(eq(contents.id, id));
-			redirect(303, '/backlog');
 		} catch (e) {
 			console.error('Update content failed:', e);
 			return fail(500, { error: 'Gagal menyimpan' });
 		}
+
+		redirect(303, '/backlog');
 	},
 
 	delete: async ({ params }) => {
@@ -58,10 +59,11 @@ export const actions = {
 		try {
 			const db = getDb();
 			await db.delete(contents).where(eq(contents.id, id));
-			redirect(303, '/backlog');
 		} catch (e) {
 			console.error('Delete content failed:', e);
 			return fail(500, { error: 'Gagal menghapus' });
 		}
+
+		redirect(303, '/backlog');
 	}
 };

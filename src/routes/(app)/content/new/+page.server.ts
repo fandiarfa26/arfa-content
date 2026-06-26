@@ -21,13 +21,16 @@ export const actions = {
 			if (val?.trim()) (values as any)[key] = val.trim();
 		}
 
+		let id: number;
 		try {
 			const db = getDb();
 			const [content] = await db.insert(contents).values(values).returning({ id: contents.id });
-			redirect(303, `/content/${content.id}`);
+			id = content.id;
 		} catch (e) {
 			console.error('Create content failed:', e);
 			return fail(500, { error: 'Gagal menyimpan' });
 		}
+
+		redirect(303, `/content/${id}`);
 	}
 };

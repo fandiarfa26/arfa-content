@@ -6,3 +6,7 @@ export function cn(...inputs: ClassValue[]) {
 }
 
 export type WithElementRef<T> = T & { ref?: unknown };
+
+export type WithoutChildrenOrChild<T> = T extends { children?: any; child?: any }
+	? Omit<T, 'children' | 'child'>
+	: T;

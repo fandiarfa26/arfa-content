@@ -21,6 +21,7 @@
 		]
 	},
 	"devDependencies": {
+		"@internationalized/date": "^3.12.2",
 		"@lucide/svelte": "^1.21.0",
 		"@sveltejs/adapter-vercel": "^6.3.3",
 		"@sveltejs/kit": "^2.63.0",

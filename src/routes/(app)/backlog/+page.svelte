@@ -8,9 +8,9 @@
 	const statuses = ['Idea', 'Ready', 'Planned', 'Published'];
 </script>
 
-<div class="flex gap-4 overflow-x-auto pb-4">
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 	{#each statuses as status}
-		<div class="bg-muted/50 flex min-w-[240px] flex-1 flex-col rounded-lg border p-3">
+		<div class="bg-muted/50 flex flex-col rounded-lg border p-3">
 			<div class="mb-3 text-xs font-semibold uppercase tracking-wider">{status} ({columns[status].length})</div>
 			<div class="flex flex-col gap-2">
 				{#each columns[status] as item}

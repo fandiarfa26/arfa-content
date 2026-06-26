@@ -8,7 +8,7 @@
 	import { toast } from 'svelte-sonner';
 
 	let { data } = $props();
-	let { counts, categoryCounts, activePlan } = $derived(data);
+	let { counts, categoryCounts } = $derived(data);
 </script>
 
 <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
@@ -44,19 +44,6 @@
 		{/if}
 	</div>
 </div>
-
-{#if activePlan}
-	<div class="mt-6">
-		<h2 class="mb-2 text-sm font-semibold">Active Weekly Plan</h2>
-		<Card.Root>
-			<Card.Content>
-				<div class="text-muted-foreground text-xs">
-					{activePlan.startDate} — {activePlan.endDate}
-				</div>
-			</Card.Content>
-		</Card.Root>
-	</div>
-{/if}
 
 <div class="mt-6">
 	<h2 class="mb-3 text-sm font-semibold">Quick Capture</h2>
