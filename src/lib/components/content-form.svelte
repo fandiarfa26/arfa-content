@@ -8,6 +8,9 @@
 	import * as Card from '$lib/components/ui/card';
 	import * as Dialog from '$lib/components/ui/dialog';
 	import Trash2 from '@lucide/svelte/icons/trash-2';
+	import Eye from '@lucide/svelte/icons/eye';
+	import Edit from '@lucide/svelte/icons/edit';
+	import Copy from '@lucide/svelte/icons/copy';
 	import { toast } from 'svelte-sonner';
 
 	let {
@@ -37,8 +40,62 @@
 	} = $props();
 
 	let open = $state(false);
+	let mode = $state<'form' | 'preview'>('preview');
+
+	const sections: { label: string; value: string | null | undefined }[] = $derived([
+		{ label: 'Title', value: content.title },
+		{ label: 'Category', value: content.category },
+		{ label: 'Hook', value: content.hook },
+		{ label: 'Problem', value: content.problem },
+		{ label: 'Experience', value: content.experience },
+		{ label: 'Lesson', value: content.lesson },
+		{ label: 'CTA', value: content.cta },
+		{ label: 'Caption', value: content.caption },
+		{ label: 'Hashtags', value: content.hashtags },
+		{ label: 'Example Script', value: content.exampleScript },
+		{ label: 'Upload Date', value: content.uploadDate },
+		{ label: 'Reels URL', value: content.reelsUrl },
+		{ label: 'TikTok URL', value: content.tiktokUrl }
+	]);
+
+	async function copyText(text: string, label: string) {
+		await navigator.clipboard.writeText(text);
+		toast.success(`${label} copied`);
+	}
 </script>
 
+<div class="mx-auto max-w-2xl space-y-6">
+	{#if editMode}
+		<Button variant="outline" onclick={() => mode = mode === 'form' ? 'preview' : 'form'} class="w-full gap-2">
+			{#if mode === 'preview'}
+				<Edit class="size-4" /> Edit
+			{:else}
+				<Eye class="size-4" /> Preview
+			{/if}
+		</Button>
+	{/if}
+
+	{#if mode === 'preview'}
+		<div class="space-y-4">
+			{#each sections as { label, value }}
+				{#if value}
+					<Card.Root>
+						<Card.Header class="flex flex-row items-center justify-between gap-2">
+							<Card.Title class="text-sm">{label}</Card.Title>
+							<Button variant="ghost" size="icon-xs" onclick={() => copyText(value, label)}>
+								<Copy class="size-3" />
+							</Button>
+						</Card.Header>
+						<Card.Content>
+							<p class="text-muted-foreground whitespace-pre-wrap text-sm">{value}</p>
+						</Card.Content>
+					</Card.Root>
+				{/if}
+			{/each}
+		</div>
+	{/if}
+
+	{#if mode === 'form'}
 <form method="POST" action={formAction} use:enhance={() => {
 		return async ({ result, update }) => {
 			if (result.type === 'failure') {
@@ -48,7 +105,7 @@
 				await update();
 			}
 		};
-	}} class="mx-auto max-w-2xl space-y-6">
+	}}>
 	<Card.Root>
 		<Card.Content class="space-y-4">
 			<div class="space-y-2">
@@ -160,6 +217,8 @@
 		{/if}
 	</div>
 </form>
+	{/if}
+</div>
 
 <Dialog.Root bind:open>
 	<Dialog.Content>
