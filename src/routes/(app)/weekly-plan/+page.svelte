@@ -11,6 +11,8 @@
 	}
 </script>
 
+<svelte:head><title>Weekly Plan | Arfa Content</title></svelte:head>
+
 {#each weeks as week}
 	<Card.Root class="mb-6">
 		<Card.Header>

@@ -18,6 +18,8 @@
 	}
 </script>
 
+<svelte:head><title>Settings | Arfa Content</title></svelte:head>
+
 <Card.Root class="mx-auto max-w-sm">
 	<Card.Header>
 		<Card.Title>Settings</Card.Title>

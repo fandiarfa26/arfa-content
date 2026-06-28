@@ -45,6 +45,8 @@
 	}
 </script>
 
+<svelte:head><title>Recap | Arfa Content</title></svelte:head>
+
 <div class="mb-6">
 	<label for="week" class="mb-1 block text-sm font-medium">Week</label>
 	<select id="week" onchange={selectWeek}

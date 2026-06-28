@@ -8,6 +8,8 @@
 	let { form } = $props();
 </script>
 
+<svelte:head><title>Masuk | Arfa Content</title></svelte:head>
+
 <div class="flex min-h-screen items-center justify-center">
 	<Card.Root class="w-full max-w-sm">
 		<Card.Header>

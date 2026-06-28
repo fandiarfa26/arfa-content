@@ -11,6 +11,8 @@
 	let { counts, categoryCounts } = $derived(data);
 </script>
 
+<svelte:head><title>Dashboard | Arfa Content</title></svelte:head>
+
 <div class="grid grid-cols-2 gap-3 md:grid-cols-4">
 	{#each Object.entries(counts) as [status, count]}
 		<Card.Root>

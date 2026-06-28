@@ -8,6 +8,8 @@
 	const statuses = ['Idea', 'Ready', 'Planned', 'Published'];
 </script>
 
+<svelte:head><title>Backlog | Arfa Content</title></svelte:head>
+
 <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
 	{#each statuses as status}
 		<div class="bg-muted/50 flex flex-col rounded-lg border p-3">
