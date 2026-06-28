@@ -32,6 +32,7 @@ export const actions = {
 			problem: (data.get('problem') as string) || null,
 			experience: (data.get('experience') as string) || null,
 			lesson: (data.get('lesson') as string) || null,
+			exampleScript: (data.get('example_script') as string) || null,
 			cta: (data.get('cta') as string) || null,
 			caption: (data.get('caption') as string) || null,
 			hashtags: (data.get('hashtags') as string) || null,

@@ -22,6 +22,7 @@ export function getStatus(content: {
 	problem: string | null;
 	experience: string | null;
 	lesson: string | null;
+	exampleScript: string | null;
 	cta: string | null;
 }): ContentStatus {
 	if (content.reelsUrl || content.tiktokUrl) return 'Published';

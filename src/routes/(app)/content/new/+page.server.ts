@@ -13,10 +13,10 @@ export const actions = {
 		if (!title?.trim()) return fail(400, { error: 'Title is required' });
 
 		const values: typeof contents.$inferInsert = { title: title.trim() };
-		const fieldKeys = ['category', 'hook', 'problem', 'experience', 'lesson', 'cta', 'caption', 'hashtags', 'uploadDate', 'reelsUrl', 'tiktokUrl'] as const;
+		const fieldKeys = ['category', 'hook', 'problem', 'experience', 'lesson', 'exampleScript', 'cta', 'caption', 'hashtags', 'uploadDate', 'reelsUrl', 'tiktokUrl'] as const;
 
 		for (const key of fieldKeys) {
-			const formKey = key === 'uploadDate' ? 'upload_date' : key === 'reelsUrl' ? 'reels_url' : key === 'tiktokUrl' ? 'tiktok_url' : key;
+			const formKey = key === 'exampleScript' ? 'example_script' : key === 'uploadDate' ? 'upload_date' : key === 'reelsUrl' ? 'reels_url' : key === 'tiktokUrl' ? 'tiktok_url' : key;
 			const val = data.get(formKey) as string | null;
 			if (val?.trim()) (values as any)[key] = val.trim();
 		}

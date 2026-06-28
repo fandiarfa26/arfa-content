@@ -23,6 +23,7 @@
 			problem?: string | null;
 			experience?: string | null;
 			lesson?: string | null;
+			exampleScript?: string | null;
 			cta?: string | null;
 			caption?: string | null;
 			hashtags?: string | null;
@@ -114,6 +115,13 @@
 				<textarea id="hashtags" name="hashtags" rows="2"
 					class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
 				>{content.hashtags ?? ''}</textarea>
+			</div>
+
+			<div class="space-y-2">
+				<Label for="example_script">Example Script</Label>
+				<textarea id="example_script" name="example_script" rows="3"
+					class="border-input bg-background ring-offset-background placeholder:text-muted-foreground focus-visible:ring-ring flex w-full rounded-md border px-3 py-2 text-sm focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
+				>{content.exampleScript ?? ''}</textarea>
 			</div>
 		</Card.Content>
 	</Card.Root>

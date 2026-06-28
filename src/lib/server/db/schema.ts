@@ -8,6 +8,7 @@ export const contents = pgTable('contents', {
 	problem: text('problem'),
 	experience: text('experience'),
 	lesson: text('lesson'),
+	exampleScript: text('example_script'),
 	cta: text('cta'),
 	caption: text('caption'),
 	hashtags: text('hashtags'),
